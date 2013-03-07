@@ -1,0 +1,14 @@
+# well yeah
+*.o
+*~
+
+# some binaries
+*.so
+*.dll
+*.a
+testapp
+
+# i use vim
+.*.swp
+
+
