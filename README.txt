@@ -60,7 +60,11 @@ if-elseif-else follows this:
 		baz();
 	}
 
-All braces are optional.
+All braces are optional, except those which are mandatory.
+And by mandatory I mean those which, if removed, end up breaking the code.
+
+Nested for() loops remain at the same indent level,
+except where an outer for() loop needs braces.
 
 Only include what you absolutely MUST. It keeps compile times down.
 

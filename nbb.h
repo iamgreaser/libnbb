@@ -73,4 +73,5 @@ void blimg_prep(blimg_t *img, int w, int h, int pitch, int pixfmt, int magic, in
 blimg_t *blimg_new(int w, int h, int pitch, int pixfmt, int magic, int palfmt, int pallen);
 
 void blit_direct_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
+void blit_direct_aligned_magic(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 

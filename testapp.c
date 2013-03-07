@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	(void)argv;
 
 	/* Loading a .tga the evil way */
-	src = blimg_new(710, 597, 710*3, BLFMT_BGR8, -1, BLFMT_NONE, 0);
+	src = blimg_new(710, 597, 710*3, BLFMT_BGR8, 0xf7b509, BLFMT_NONE, 0);
 	fp = fopen("dat/rainbowclown-24bpp.tga","rb");
 	fseek(fp, 18, SEEK_CUR);
 	fread(src->data, 3*710*597, 1, fp);
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 	blimg_prep(&dest, screen->w, screen->h, screen->pitch, BLFMT_BGR8, -1, BLFMT_NONE, 0, screen->pixels, NULL);
 
 	/* Perform a blit */
-	blit_direct_aligned(&dest, src, 10, 10, 620, 460, 0, 5);
+	blit_direct_aligned_magic(&dest, src, 10, 10, 620, 460, 0, 5);
 
 	/* Show it */
 	SDL_Flip(screen);

@@ -1,4 +1,4 @@
-OBJS = direct_ref_b.o blfmt.o blimg.o
+OBJS = direct_ref_b.o direct_magic_ref_b.o blfmt.o blimg.o
 WARN = -Wall -Wextra -pedantic -std=c89
 
 all: libnbb.so testapp
@@ -14,6 +14,9 @@ libnbb.so: $(OBJS)
 
 direct_ref_b.o: direct_ref_b.c
 	$(CC) $(WARN) -c -fPIC -o direct_ref_b.o direct_ref_b.c
+
+direct_magic_ref_b.o: direct_magic_ref_b.c
+	$(CC) $(WARN) -c -fPIC -o direct_magic_ref_b.o direct_magic_ref_b.c
 
 blfmt.o: blfmt.c
 	$(CC) $(WARN) -c -fPIC -o blfmt.o blfmt.c
