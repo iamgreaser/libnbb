@@ -20,7 +20,7 @@ Blit stuff in a multitude of specific formats.
 TODO: make this so.
 Currently it only does same-format blits for simple byte-aligned formats.
 Such as BGRX 8bpc.
-Also doesn't do alpha blending or magic colour transparency yet.
+Also doesn't do alpha blending yet.
 
 What can't it do?
 
