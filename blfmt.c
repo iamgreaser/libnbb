@@ -68,6 +68,6 @@ int blfmt_blklen(int fmt)
 }
 
 /*
-
+Prepare the block format 
 */
 

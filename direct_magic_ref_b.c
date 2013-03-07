@@ -23,6 +23,10 @@ void blit_direct_aligned_magic(blimg_t *dest, blimg_t *src, int sx, int sy, int 
 	int p;
 	char *sp, *dp;
 
+	/* Prepare for blit */
+	blit_prep_start(src, &sx, &sy, &sw, &sh, &dx, &dy, &sp, NULL, &pixlen);
+	blit_prep_start(dest, &dx, &dy, &sw, &sh, &sx, &sy, &dp, NULL, NULL);
+
 	/* Get pixel/stride length in bytes */
 	pixlen = blfmt_blklen(dest->pixfmt) / 8; 
 	stride = pixlen * sw;
@@ -30,10 +34,6 @@ void blit_direct_aligned_magic(blimg_t *dest, blimg_t *src, int sx, int sy, int 
 	/* Get magic / pixel mask */
 	magic = src->magic;
 	pmask = (1 << (pixlen * 8)) - 1;
-
-	/* Get pointers */
-	sp = src->data + (src->pitch * sy) + (pixlen * sx);
-	dp = dest->data + (dest->pitch * dy) + (pixlen * dx);
 
 	/* Blit */
 	for(y = 0; y < sh; y++, sp += src->pitch - stride, dp += dest->pitch - stride)

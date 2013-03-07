@@ -19,6 +19,10 @@ void blit_direct_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, in
 	int stride;
 	char *sp, *dp;
 
+	/* Prepare for blit */
+	blit_prep_start(src, &sx, &sy, &sw, &sh, &dx, &dy, &sp, NULL, &pixlen);
+	blit_prep_start(dest, &dx, &dy, &sw, &sh, &sx, &sy, &dp, NULL, NULL);
+
 	/* Get pixel/stride length in bytes */
 	pixlen = blfmt_blklen(dest->pixfmt) / 8; 
 	stride = pixlen * sw;

@@ -17,6 +17,12 @@ typedef struct blimg
 	char *data;
 } blimg_t;
 
+typedef struct blfmt
+{
+	int (*fn_conv)(blimg_t *src, blimg_t *dest, int sx, int sy, int sw, int sh, int dx, int dy); 
+	int chain;
+} blfmt_t;
+
 enum
 {
 	BLFMT_NONE = 0,
@@ -71,6 +77,8 @@ int blfmt_blklen(int fmt);
 void blimg_free(blimg_t *img);
 void blimg_prep(blimg_t *img, int w, int h, int pitch, int pixfmt, int magic, int palfmt, int pallen, char *data, char *pal);
 blimg_t *blimg_new(int w, int h, int pitch, int pixfmt, int magic, int palfmt, int pallen);
+
+void blit_prep_start(blimg_t *img, int *x, int *y, int *w, int *h, int *ax, int *ay, char **ptr, int *subptr, int *pixlen);
 
 void blit_direct_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 void blit_direct_aligned_magic(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
