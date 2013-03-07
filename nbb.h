@@ -78,9 +78,16 @@ void blimg_free(blimg_t *img);
 void blimg_prep(blimg_t *img, int w, int h, int pitch, int pixfmt, int magic, int palfmt, int pallen, char *data, char *pal);
 blimg_t *blimg_new(int w, int h, int pitch, int pixfmt, int magic, int palfmt, int pallen);
 
+blimg_t *bltmp_acquire(int w, int h, int pitch, int pixfmt, int magic, int palfmt, int pallen, char *pal);
+void bltmp_release(blimg_t *img);
+void bltmp_free_unused(void);
+void bltmp_free_all(void);
+
 void blit_prep_start(blimg_t *img, int *x, int *y, int *w, int *h, int *ax, int *ay, char **ptr, int *subptr, int *pixlen);
 
 void blit_direct_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 void blit_direct_aligned_magic(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 void blit_mapped_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
+
+int blconv_rgb8_brswap(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 

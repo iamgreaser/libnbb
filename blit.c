@@ -16,7 +16,8 @@ ptr, subptr, and pixlen are optional (use NULL if you don't want to read them).
 void blit_prep_start(blimg_t *img, int *x, int *y, int *w, int *h, int *ax, int *ay, char **ptr, int *subptr, int *pixlen)
 {
 	int bitx;
-	int tptr, tsubptr, tpixlen;
+	char *tptr;
+	int tsubptr, tpixlen;
 
 	/* Replace some unused variables with temporaries */
 	if(ptr == NULL) ptr = &tptr;

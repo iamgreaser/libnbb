@@ -1,4 +1,4 @@
-OBJS = direct_ref_b.o direct_magic_ref_b.o mapped_ref_b.o blconv.o blfmt.o blimg.o blit.o
+OBJS = direct_ref_b.o direct_magic_ref_b.o mapped_ref_b.o blconv.o blfmt.o blimg.o bltmp.o bltmp_acquire.o blit.o
 CFLAGS = -Wall -Wextra -pedantic -std=c89 -g
 
 all: libnbb.so testapp
@@ -29,6 +29,12 @@ blconv.o: blconv.c nbb.h
 
 blimg.o: blimg.c nbb.h
 	$(CC) -c -fPIC -o blimg.o blimg.c
+
+bltmp_acquire.o: bltmp_acquire.c nbb.h
+	$(CC) -c -fPIC -o bltmp_acquire.o bltmp_acquire.c
+
+bltmp.o: bltmp.c nbb.h
+	$(CC) -c -fPIC -o bltmp.o bltmp.c
 
 blit.o: blit.c nbb.h
 	$(CC) -c -fPIC -o blit.o blit.c
