@@ -21,42 +21,41 @@ int main(int argc, char *argv[])
 	FILE *fp;
 	SDL_Surface *screen;
 	blimg_t *src;
-	blimg_t *src_swap;
 	blimg_t dest;
+	int i;
 
 	(void)argc;
 	(void)argv;
 
 	/* Loading a .tga the evil way */
-	src = blimg_new(710, 597, 710*3, BLFMT_BGR8, 0xf7b509, BLFMT_NONE, 0);
+	/*src = blimg_new(710, 597, 710*3, BLFMT_BGR8, 0xf7b509, BLFMT_NONE, 0);*/
 	/*src = blimg_new(710, 597, 710, BLFMT_P8, -1, BLFMT_BGR8, 3*256);*/
-	fp = fopen("dat/rainbowclown-24bpp.tga","rb");
+	src = blimg_new(800, 600, 800*4, BLFMT_BGRA8, -1, BLFMT_NONE, 0);
+	fp = fopen("dat/pngdemo.tga","rb");
 	fseek(fp, 18, SEEK_CUR);
 	/*fread(src->pal, 3*128, 1, fp);*/
-	fread(src->data, 3*710*597, 1, fp);
+	fread(src->data, 4*800*600, 1, fp);
 	fclose(fp);
 
 	/* Start SDL for our test */
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_NOPARACHUTE);
-	screen = SDL_SetVideoMode(640, 480, 24, 0);
+	screen = SDL_SetVideoMode(640, 480, 32, 0);
 	signal(SIGTERM, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 
 	/* Prepare our blimg_t for the screen */
-	blimg_prep(&dest, screen->w, screen->h, screen->pitch, BLFMT_BGR8, -1, BLFMT_NONE, 0, screen->pixels, NULL);
+	blimg_prep(&dest, screen->w, screen->h, screen->pitch, BLFMT_BGRA8, -1, BLFMT_NONE, 0, screen->pixels, NULL);
 
 	/* Perform a blit */
-	src_swap = bltmp_acquire(src->w, src->h, src->pitch, BLFMT_RGB8, src->magic, src->palfmt, src->pallen, src->pal);
-	blconv_rgb8_brswap(src_swap, src, 0, 0, src->w, src->h, 0, 0);
-	blit_direct_aligned(&dest, src_swap, 10, 10, 620, 460, 0, 5);
-	/*blit_mapped_aligned(&dest, src, 10, 10, 620, 460, 0, 5);*/
-	bltmp_release(src_swap);
-	bltmp_free_unused();
+	for(i = 0; i < 10; i++)
+	{
+		blit_rgba8_aligned_alpha(&dest, src, 10, 10, 620, 460, 0, 5);
 
-	/* Show it */
-	SDL_Flip(screen);
+		/* Show it */
+		SDL_Flip(screen);
 
-	SDL_Delay(1000);
+		SDL_Delay(200);
+	}
 
 	bltmp_free_all();
 	return 0;

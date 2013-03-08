@@ -87,6 +87,7 @@ void blit_prep_start(blimg_t *img, int *x, int *y, int *w, int *h, int *ax, int 
 
 void blit_direct_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 void blit_direct_aligned_magic(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
+void blit_rgba8_aligned_alpha(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 void blit_mapped_aligned(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
 
 int blconv_rgb8_brswap(blimg_t *dest, blimg_t *src, int sx, int sy, int sw, int sh, int dx, int dy);
